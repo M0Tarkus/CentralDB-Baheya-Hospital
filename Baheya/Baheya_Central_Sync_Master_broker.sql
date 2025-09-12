@@ -56,7 +56,8 @@ begin
 										@ParamDef, 
 										@hosp_key output			
 		end
-							
+
+				
 	if exists (select * from sys.objects where name=@tblname and type='U' )
 	BEGIN
 	print 'Hi'
@@ -68,6 +69,7 @@ begin
 				insert into #master_columns
 				exec(@master_columns_query)
 print 'Bye'
+
 declare @is_centraldb int=(select count(*) from sys.databases where name='centraldb') 
 				
 		if @transType=1 -- exclude computed, set identity on/off, set hospital id
