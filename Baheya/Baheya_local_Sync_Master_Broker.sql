@@ -1,6 +1,6 @@
-USE [Baheya_Central]
+USE [baheya]
 GO
-/****** Object:  StoredProcedure [dbo].[Sync_Master_Broker]    Script Date: 9/12/2025 2:47:24 PM ******/
+/****** Object:  StoredProcedure [dbo].[Sync_Master_Broker]    Script Date: 9/12/2025 2:49:40 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -26,16 +26,15 @@ begin
 	declare @staff_key nvarchar(20)			
 	--declare @source_db varchar(100)='lo.db'
 	declare @master_listener varchar(200)=''
-	if @source_db like'%.%' and  @source_db not like'%.%.%.%'
+	if @source_db like'%.%' and @source_db not like'%.%.%.%'
 		begin
 			print 'Src_with listener'
 			print charindex('.',@source_db,1)
 			select @master_listener=substring(@source_db,1,charindex('.',@source_db,1)-1)
 			print @master_listener
-			set @source_db=right(@source_db,len(@source_db)-len(@master_listener)-1)
-			
-			print @source_db
 
+			set @source_db=right(@source_db,len(@source_db)-len(@master_listener)-1)
+			print @source_db
 		end
 
 	declare @Repository_db_name nvarchar(50)='MedicaCloud_Repository'
